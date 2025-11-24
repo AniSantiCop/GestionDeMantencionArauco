@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Maquinaria</h1>
+
+<a href="{% url 'maquinaria_create' %}">Nueva maquinaria</a>
+
+<ul>
+{% for m in maquinas %}
+    <li>
+        {{ m.nombre }} - {{ m.tipo }} - {{ m.estado }}
+        | <a href="{% url 'maquinaria_update' m.pk %}">Editar</a>
+        | <a href="{% url 'maquinaria_delete' m.pk %}">Eliminar</a>
+    </li>
+{% empty %}
+    <li>No hay maquinaria registrada.</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

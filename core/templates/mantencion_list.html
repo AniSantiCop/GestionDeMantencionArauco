@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Mantenciones</h1>
+
+<a href="{% url 'mantencion_create' %}">Nueva Mantención</a>
+
+<ul>
+{% for m in mantenciones %}
+    <li>
+        {{ m }} | Programada: {{ m.fecha_programada }} | Realizada: {{ m.fecha_realizada }}
+        | <a href="{% url 'mantencion_update' m.pk %}">Editar</a>
+        | <a href="{% url 'mantencion_delete' m.pk %}">Eliminar</a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mantenciones Arauco</title>
+</head>
+<body>
+
+{% if user.is_authenticated %}
+<p>Bienvenido {{ user.username }} | 
+    <a href="/">Dashboard</a> | 
+    <a href="/maquinaria/">Maquinaria</a> |
+    <a href="/mantenciones/">Mantenciones</a> |
+    <a href="/logout/">Cerrar sesión</a>
+</p>
+{% endif %}
+
+<hr>
+
+{% for message in messages %}
+<p style="color: green">{{ message }}</p>
+{% endfor %}
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
