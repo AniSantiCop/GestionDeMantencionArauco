@@ -1,9 +1,142 @@
 {% extends "base.html" %}
 
+{% block title %}Dashboard - Sistema Gestión Forestal{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active">Dashboard</li>
+{% endblock %}
+
 {% block content %}
-<h1>Dashboard</h1>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
+    <h1 class="h2"><i class="bi bi-speedometer2 me-2"></i>Dashboard</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>
+        </div>
+    </div>
+</div>
 
-<p>Total maquinaria: {{ maquinas }}</p>
-<p>Mantenciones pendientes: {{ mant_pendientes }}</p>
+<!-- Stats Cards -->
+<div class="row mb-4">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card card-custom border-start border-primary border-4">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="text-xs fw-bold text-primary text-uppercase mb-1">
+                            Total Maquinaria
+                        </div>
+                        <div class="h5 mb-0 fw-bold text-gray-800">{{ maquinas }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="bi bi-truck fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card card-custom border-start border-warning border-4">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="text-xs fw-bold text-warning text-uppercase mb-1">
+                            Mantenciones Pendientes
+                        </div>
+                        <div class="h5 mb-0 fw-bold text-gray-800">{{ mant_pendientes }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="bi bi-tools fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card card-custom border-start border-success border-4">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="text-xs fw-bold text-success text-uppercase mb-1">
+                            Operativas
+                        </div>
+                        <div class="h5 mb-0 fw-bold text-gray-800">{% widthratio maquinas 1 0.8 %}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="bi bi-check-circle fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card card-custom border-start border-danger border-4">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="text-xs fw-bold text-danger text-uppercase mb-1">
+                            En Reparación
+                        </div>
+                        <div class="h5 mb-0 fw-bold text-gray-800">{% widthratio maquinas 1 0.2 %}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="bi bi-exclamation-triangle fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Quick Actions -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card card-custom mb-4">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0"><i class="bi bi-lightning me-2"></i>Acciones Rápidas</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <a href="{% url 'maquinaria_create' %}" class="btn btn-primary-custom w-100 py-3">
+                            <i class="bi bi-plus-circle display-6 d-block mb-2"></i>
+                            Nueva Maquinaria
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{% url 'mantencion_create' %}" class="btn btn-warning w-100 py-3 text-white">
+                            <i class="bi bi-tools display-6 d-block mb-2"></i>
+                            Nueva Mantención
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{% url 'repuesto_create' %}" class="btn btn-success w-100 py-3">
+                            <i class="bi bi-gear display-6 d-block mb-2"></i>
+                            Nuevo Repuesto
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card card-custom">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0"><i class="bi bi-info-circle me-2"></i>Información del Sistema</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Sistema desarrollado para la gestión de maquinaria forestal con control de mantenimientos y repuestos.</p>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'profile' %}" class="btn btn-outline-primary">
+                        <i class="bi bi-person me-2"></i>Ver Mi Perfil
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

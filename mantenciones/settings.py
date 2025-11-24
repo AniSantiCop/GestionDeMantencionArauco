@@ -24,6 +24,7 @@ INSTALLED_APPS = [
 
     # App principal
     'core',
+    'mantenciones',
 
     # Librería para mejorar formularios
     'widget_tweaks',

@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Maquinaria, Mantencion
-from .forms import MaquinariaForm, MantencionForm
+from .models import Maquinaria, Mantencion, Repuesto
+from .forms import MaquinariaForm, MantencionForm, RepuestoForm
 
 # --- Dashboard ---
 @login_required
@@ -56,7 +56,10 @@ def mantencion_list(request):
 def mantencion_create(request):
     form = MantencionForm(request.POST or None)
     if form.is_valid():
-        form.save()
+        mantencion = form.save(commit=False)
+        mantencion.tecnico_responsable = request.user
+        mantencion.save()
+        form.save_m2m()  # Para guardar los repuestos ManyToMany
         messages.success(request, "Mantención registrada")
         return redirect("mantencion_list")
     return render(request, "mantencion_form.html", {"form": form})
@@ -77,3 +80,40 @@ def mantencion_delete(request, pk):
     mant.delete()
     messages.success(request, "Mantención eliminada")
     return redirect("mantencion_list")
+
+# --- REPUESTOS CRUD ---
+@login_required
+def repuesto_list(request):
+    repuestos = Repuesto.objects.all()
+    return render(request, "repuesto_list.html", {"repuestos": repuestos})
+
+@login_required
+def repuesto_create(request):
+    form = RepuestoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Repuesto creado correctamente")
+        return redirect("repuesto_list")
+    return render(request, "repuesto_form.html", {"form": form})
+
+@login_required
+def repuesto_update(request, pk):
+    repuesto = get_object_or_404(Repuesto, pk=pk)
+    form = RepuestoForm(request.POST or None, instance=repuesto)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Repuesto actualizado")
+        return redirect("repuesto_list")
+    return render(request, "repuesto_form.html", {"form": form})
+
+@login_required
+def repuesto_delete(request, pk):
+    repuesto = get_object_or_404(Repuesto, pk=pk)
+    repuesto.delete()
+    messages.success(request, "Repuesto eliminado")
+    return redirect("repuesto_list")
+
+# --- PROFILE ---
+@login_required
+def profile(request):
+    return render(request, 'profile.html')

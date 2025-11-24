@@ -17,3 +17,8 @@ class MantencionForm(forms.ModelForm):
             "fecha_programada": forms.DateInput(attrs={"type": "date"}),
             "fecha_realizada": forms.DateInput(attrs={"type": "date"}),
         }
+
+class RepuestoForm(forms.ModelForm):
+    class Meta:
+        model = Repuesto
+        fields = "__all__"

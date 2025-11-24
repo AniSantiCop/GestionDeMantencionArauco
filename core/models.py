@@ -16,11 +16,14 @@ class Maquinaria(models.Model):
 
 
 class Repuesto(models.Model):
-    nombre = models.CharField(max_length=120)
-    stock = models.PositiveIntegerField(default=0)
-
+    nombre = models.CharField(max_length=100)
+    categoria = models.CharField(max_length=50, default='General')
+    stock = models.IntegerField(default=0)
+    precio = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    descripcion = models.TextField(blank=True)
+    
     def __str__(self):
-        return f"{self.nombre} (Stock: {self.stock})"
+        return self.nombre
 
 
 class Mantencion(models.Model):

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Repuestos</h1>
+
+<a href="{% url 'repuesto_create' %}">Nuevo Repuesto</a>
+
+<ul>
+{% for r in repuestos %}
+    <li>
+        {{ r.nombre }} - {{ r.categoria }} - Stock: {{ r.stock }} - ${{ r.precio }}
+        | <a href="{% url 'repuesto_update' r.pk %}">Editar</a>
+        | <a href="{% url 'repuesto_delete' r.pk %}">Eliminar</a>
+    </li>
+{% empty %}
+    <li>No hay repuestos registrados.</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
