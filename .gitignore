@@ -1,0 +1,58 @@
+# ==========================
+# Archivos de Python
+# ==========================
+*.pyc
+*.pyo
+__pycache__/
+
+# ==========================
+# Entorno virtual
+# ==========================
+venv/
+env/
+.env
+*.env
+
+# ==========================
+# Base de datos
+# ==========================
+db.sqlite3
+
+# ==========================
+# Migraciones (opcional)
+# ==========================
+*/migrations/*.pyc
+*/migrations/*.pyo
+*/migrations/__pycache__/
+
+# ==========================
+# Archivos de sistema
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Logs
+# ==========================
+*.log
+
+# ==========================
+# Configuraciones locales y secretos
+# ==========================
+local_settings.py
+*.secret
+*.key
+
+# ==========================
+# IDE / editores
+# ==========================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ==========================
+# Otros
+# ==========================
+*.bak
+*.swp

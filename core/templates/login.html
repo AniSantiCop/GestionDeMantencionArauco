@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iniciar Sesión</title>
+</head>
+<body>
+
+<h2>Iniciar sesión</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Ingresar</button>
+</form>
+
+{% if form.errors %}
+<p style="color:red;">Usuario o contraseña incorrectos.</p>
+{% endif %}
+
+</body>
+</html>
